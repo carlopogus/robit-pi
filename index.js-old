@@ -1,0 +1,75 @@
+const Gpio = require('pigpio').Gpio;
+
+const motor1a = new Gpio(14, {mode: Gpio.OUTPUT}); //LF
+const motor1b = new Gpio(15, {mode: Gpio.OUTPUT}); //LB
+const motor2a = new Gpio(18, {mode: Gpio.OUTPUT}); //RF
+const motor2b = new Gpio(23, {mode: Gpio.OUTPUT}); //RB
+
+function lf(time) {
+	motor1a.pwmWrite(180);
+	setTimeout(() => {
+	  motor1a.pwmWrite(0)
+	}, time)
+}
+
+function lb(time) {
+	motor1b.pwmWrite(180);
+	setTimeout(() => {
+	  motor1b.pwmWrite(0)
+	}, time)
+}
+
+function rf(time) {
+	motor2a.pwmWrite(180);
+	setTimeout(() => {
+	  motor2a.pwmWrite(0)
+	}, time)
+}
+
+function rb(time) {
+	motor2b.pwmWrite(180);
+	setTimeout(() => {
+	  motor2b.pwmWrite(0)
+	}, time)
+}
+
+motor1a.pwmWrite(180);
+
+setTimeout(() => {
+  motor1a.pwmWrite(0)
+  motor1b.pwmWrite(180);
+}, 1000)
+
+
+setTimeout(() => {
+  motor1b.pwmWrite(0)
+  motor2a.pwmWrite(180);
+}, 2000)
+
+
+
+setTimeout(() => {
+  motor2a.pwmWrite(0)
+  motor2b.pwmWrite(180);
+}, 3000)
+
+
+setTimeout(() => {
+  motor2b.pwmWrite(0)
+  motor1a.pwmWrite(180);
+  motor2a.pwmWrite(180);
+}, 4000)
+
+
+
+setTimeout(() => {
+  motor1a.pwmWrite(0);
+  motor2a.pwmWrite(0);
+  motor1b.pwmWrite(180);
+  motor2b.pwmWrite(180);
+}, 5000)
+
+setTimeout(() => {
+  motor1b.pwmWrite(0);
+  motor2b.pwmWrite(0);
+}, 6000)
